@@ -1,16 +1,16 @@
-import React, { useContext } from 'react';
-import { AppContext } from '../index';
-import { makeStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import IconButton from '@material-ui/core/IconButton';
-import Button from '@material-ui/core/Button';
-import FitnessCenterIcon from '@material-ui/icons/FitnessCenter';
-import AccountCircle from '@material-ui/icons/AccountCircle';
-import {toggleTheme, toggleSI, signOut} from '../global/Reducer';
-import Brightness4Icon from '@material-ui/icons/Brightness4';
-import Brightness7Icon from '@material-ui/icons/Brightness7';
+import React, { useContext } from "react";
+import { AppContext } from "../index";
+import { makeStyles } from "@material-ui/core/styles";
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import Typography from "@material-ui/core/Typography";
+import IconButton from "@material-ui/core/IconButton";
+import Button from "@material-ui/core/Button";
+import FitnessCenterIcon from "@material-ui/icons/FitnessCenter";
+import AccountCircle from "@material-ui/icons/AccountCircle";
+import { toggleTheme, toggleReg, toggleSI, signOut } from "../global/Reducer";
+import Brightness4Icon from "@material-ui/icons/Brightness4";
+import Brightness7Icon from "@material-ui/icons/Brightness7";
 import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
@@ -30,10 +30,10 @@ export default function MenuAppBar() {
   const classes = useStyles();
   const history = useHistory();
 
-  function logout(){
+  function logout() {
     app.dispatch(signOut());
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
     console.log("localStorage removed");
   }
 
@@ -41,56 +41,80 @@ export default function MenuAppBar() {
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
-            <Button
-                    edge="start"  color="inherit" aria-label="menu"
-                    size="large"
-                    className={classes.menuButton}
-                    startIcon={<FitnessCenterIcon />}
-                    onClick={()=>{console.log(app.state); history.push("/");}}
-                    >
-                    FiT-Now for Trainers
-            </Button>
-          <Typography variant="h6" className={classes.title}>
-            
-          </Typography>
+          <Button
+            edge="start"
+            color="inherit"
+            aria-label="menu"
+            size="large"
+            className={classes.menuButton}
+            startIcon={<FitnessCenterIcon />}
+            onClick={() => {
+              console.log(app.state);
+              history.push("/");
+            }}
+          >
+            FiT-Now for Trainers
+          </Button>
+          <Typography variant="h6" className={classes.title}></Typography>
           {app.state.login ? (
             <div>
-            <Button
+              <Button
                 className={classes.menuButton}
                 aria-label="account of current user"
                 aria-controls="menu-appbar"
                 aria-haspopup="true"
                 endIcon={<AccountCircle />}
-                onClick={()=>{history.push("/account");}}
+                onClick={() => {
+                  history.push("/account");
+                }}
                 color="inherit"
-            >
-                    {app.state.user.name}
-            </Button>
+              >
+                {app.state.user.name}
+              </Button>
               <Button onClick={logout} color="inherit" variant="outlined">
-                  Logout
+                Logout
               </Button>
             </div>
-          ):
-          (
-              <Button onClick={()=>app.dispatch(toggleSI())} color="inherit" variant="outlined">
-                  Login
+          ) : (
+            <>
+              <Button
+                onClick={() => {
+                  app.dispatch(toggleReg());
+                }}
+                color="inherit"
+                variant="outlined"
+              >
+                Register
               </Button>
-          )
-          }
-                 {
-                   app.state.darkMode ? 
-                   (
-                     <IconButton onClick={()=>{app.dispatch(toggleTheme())}} color="inherit">
- 									    <Brightness7Icon />
- 								    </IconButton>
-                   )
-                   :
-                   (
-                     <IconButton onClick={()=>{app.dispatch(toggleTheme())}} color="inherit">
- 									    <Brightness4Icon />
- 								    </IconButton>
-                   )
-                 }
+              &nbsp;
+              <Button
+                onClick={() => app.dispatch(toggleSI())}
+                color="inherit"
+                variant="outlined"
+              >
+                Login
+              </Button>
+            </>
+          )}
+          {app.state.darkMode ? (
+            <IconButton
+              onClick={() => {
+                app.dispatch(toggleTheme());
+              }}
+              color="inherit"
+            >
+              <Brightness7Icon />
+            </IconButton>
+          ) : (
+            <IconButton
+              onClick={() => {
+                app.dispatch(toggleTheme());
+              }}
+              color="inherit"
+            >
+              <Brightness4Icon />
+            </IconButton>
+          )}
         </Toolbar>
       </AppBar>
     </div>
