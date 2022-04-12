@@ -152,7 +152,7 @@ router.delete('/:id',(req,res,next)=>{
     userModel.remove({_id:req.params.id}).exec().then(doc =>{
         if(doc.n>0){
             return res.status(200).json({
-                message:"Trainee deleted successfully ",
+                message:"Trainee deleted successfully",
             });
         }
         else {

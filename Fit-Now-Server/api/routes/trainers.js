@@ -5,7 +5,13 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const trainerModel = require('../models/trainers');
 
-// get all trainers.
+/**
+ *  Status code : 200 -> Success.
+ *  Status code : 404 -> Not found.
+ *  Status code : 500 -> Server Error.
+ */
+
+// this API will fetch all trainers from the mongoDB collection (trainerdbs).
 router.get('/',(req,res,next)=>{
     trainerModel.find().exec().then(doc => {
         console.log(doc)
@@ -24,7 +30,7 @@ router.get('/',(req,res,next)=>{
     })
 });
 
-// Register Trainer.
+//  this API will register trainer inside the MongoDB collection (trainerdbs).
 router.post('/signup',(req,res,next)=>{
     trainerModel.find({email: req.body.email}).exec().then(train => {
         if(train.length > 0){
@@ -82,7 +88,7 @@ router.post('/signup',(req,res,next)=>{
   
 });
 
-// update trainer profile.
+//  this API will update trainer profile inside MongoDB collection (trainerdbs).
 router.patch('/:id',(req,res,next)=>{
     const u = req.params.id;
     arr=req.body;
@@ -101,7 +107,7 @@ router.patch('/:id',(req,res,next)=>{
                 trainerModel.find({_id:u}).exec().then(doc =>{
                     console.log(doc);
                     res.status(200).json({
-                        message:"Trained updated",
+                        message:"Trainer updated",
                         new:doc[0]
                     });
                 }).catch(err=>{
@@ -115,7 +121,7 @@ router.patch('/:id',(req,res,next)=>{
 });
 
 
-// login authentication
+//  this API will Authenticate trainer based on the emailID and password.
 router.post('/login',(req,res,next)=>{
     trainerModel.find({email: req.body.email}).exec().then(trainer => {
         if(trainer.length < 1){
@@ -157,7 +163,7 @@ router.post('/login',(req,res,next)=>{
 });
 
 
-// delete trainer
+//  this API will delete trainer from the MongoDB collection (trainerdbs).
 router.delete('/:id',(req,res,next)=>{
     trainerModel.remove({_id:req.params.id}).exec().then(doc =>{
         if(doc.n>0){
@@ -179,7 +185,7 @@ router.delete('/:id',(req,res,next)=>{
     });
 }); 
 
-// get trainer by ID
+//  this API will fetch the trainer profile on the basis of id from the MongoDB collection (trainerdbs).
 router.get('/:id',(req,res,next)=>{
     const u = req.params.id;
     trainerModel.find({_id:u}).exec().then(doc =>{
@@ -200,5 +206,58 @@ router.get('/:id',(req,res,next)=>{
 });
 
 // Need to create API for like functionality.
+
+
+// this API will update the count of like for the trainer.
+router.patch('/like/:id/:i',(req,res,next)=>{
+    const i = req.params.i;
+    trainerModel.update({ _id:req.params.id },{ $inc:{likes: i} }).exec().then(doc =>{
+        if(doc.n===1){
+            trainerModel.find({_id:req.params.id}).exec().then(doc =>{
+                console.log(doc);
+                res.status(200).json({
+                    message:"liked",
+                    likes:doc[0].likes
+                });
+            }).catch(err=>{
+                console.log(err);
+                res.status(500).json({error:err,message:"error in fetching modified data"});
+            });
+        }
+    })
+    .catch(err => {
+        res.status(500).json({
+            message:"liking error",
+            error:err
+        });
+    });
+});
+
+// this API will update the count of dislike for the trainer.
+router.patch('/dislike/:id/:i',(req,res,next)=>{
+    const i = req.params.i;
+    trainerModel.update({ _id:req.params.id },{ $inc:{dislikes: i} }).exec().then(doc =>{
+        if(doc.n===1){
+            trainerModel.find({_id:req.params.id}).exec().then(doc =>{
+                console.log(doc);
+                res.status(200).json({
+                    message:"disliked",
+                    dislikes:doc[0].dislikes
+                });
+            }).catch(err=>{
+                console.log(err);
+                res.status(500).json({error:err,message:"error in fetching modified data"});
+            });
+        }
+    })
+    .catch(err => {
+        res.status(500).json({
+            message:"disliking error",
+            error:err
+        });
+    });
+});
+
+
 
 module.exports = router;

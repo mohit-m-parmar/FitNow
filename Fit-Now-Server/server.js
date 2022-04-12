@@ -5,6 +5,7 @@ const app = express();
 
 const trainerRoutes=require('./api/routes/trainers');
 const userRoutes=require('./api/routes/users');
+const adminRoutes=require('./api/routes/admin');
 
 mongoose.connect('mongodb+srv://sarveshpatidar:sarvesh123@cluster0.8376r.mongodb.net/GymTrainerApp?retryWrites=true&w=majority',{
     useNewUrlParser: true,
@@ -25,6 +26,7 @@ app.use((req,res,next)=>{
 
 app.use('/trainers',trainerRoutes); 
 app.use('/users',userRoutes);
+app.use('/admin',adminRoutes);
 app.use((req,res,next)=>{
     const error = new Error('Routing error: Rout not found ');
     error.status = 404;
