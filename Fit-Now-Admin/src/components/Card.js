@@ -11,10 +11,7 @@ import AccordionActions from '@material-ui/core/AccordionActions';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ThumbsUpDownIcon from '@material-ui/icons/ThumbsUpDown';
-import ThumbDownOutlinedIcon from '@material-ui/icons/ThumbDownOutlined';
-import ThumbUpOutlinedIcon from '@material-ui/icons/ThumbUpOutlined';
-import ThumbDownIcon from '@material-ui/icons/ThumbDown';
-import ThumbUpIcon from '@material-ui/icons/ThumbUp';
+
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
