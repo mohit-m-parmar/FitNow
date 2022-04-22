@@ -14,8 +14,9 @@ Running the project:
 
 1. The server needs to be run before any other package can be run. To run the server, enter following commands in the terminal:
 
-   'cd Fit-Now-Server'
-   'npm start'
+   `cd Fit-Now-Server`
+
+   `npm start`
 
 2. To run the Trainer module:
 
