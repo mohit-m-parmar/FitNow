@@ -20,14 +20,17 @@ Running the project:
 2. To run the Trainer module:
 
    `cd Fit-Now-Trainer`
+
    `npm start`
 
 3. To run the Trainee module:
 
    `cd Fit-Now-Trainee`
+
    `npm start`
 
-4. To run the Admin module;
+4. To run the Admin module:
 
    `cd Fit-Now-Admin`
+
    `npm start`
