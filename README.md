@@ -1,7 +1,7 @@
 # FitNow
 
-Fit Now : Connecting Trainers and Trainees
-Software Development Spring 2022
+##Fit Now : Connecting Trainers and Trainees
+###sSoftware Development Spring 2022
 Group 4
 
 Setup:
@@ -19,15 +19,15 @@ Running the project:
 
 2. To run the Trainer module:
 
-   'cd Fit-Now-Trainer'
-   'npm start'
+   `cd Fit-Now-Trainer`
+   `npm start`
 
 3. To run the Trainee module:
 
-   'cd Fit-Now-Trainee'
-   'npm start'
+   `cd Fit-Now-Trainee`
+   `npm start`
 
 4. To run the Admin module;
 
-   'cd Fit-Now-Admin'
-   'npm start'
+   `cd Fit-Now-Admin`
+   `npm start`
