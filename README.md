@@ -1,7 +1,9 @@
 # FitNow
 
-##Fit Now : Connecting Trainers and Trainees
-###sSoftware Development Spring 2022
+## Fit Now : Connecting Trainers and Trainees
+
+### Software Development Spring 2022
+
 Group 4
 
 Setup:
