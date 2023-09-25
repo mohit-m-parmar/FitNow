@@ -7,7 +7,7 @@ const trainerRoutes=require('./api/routes/trainers');
 const userRoutes=require('./api/routes/users');
 const adminRoutes=require('./api/routes/admin');
 
-mongoose.connect('mongodb+srv://sarveshpatidar:sarvesh123@cluster0.8376r.mongodb.net/GymTrainerApp?retryWrites=true&w=majority',{
+mongoose.connect('mongodb+srv://mac-user:macuser@mohitsdb.0oaoip8.mongodb.net/',{
     useNewUrlParser: true,
     useUnifiedTopology: true
 });
